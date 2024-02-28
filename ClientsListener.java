@@ -5,11 +5,11 @@ public class ClientsListener implements Runnable
 {
     private ObjectInputStream is = null;
     private ObjectOutputStream os = null;
-    private TTTFrame frame = null;
+    private CC4_Frame frame = null;
 
     public ClientsListener(ObjectInputStream is,
                            ObjectOutputStream os,
-                           TTTFrame frame) {
+                           CC4_Frame frame) {
         this.is = is;
         this.os = os;
         this.frame = frame;

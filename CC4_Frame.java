@@ -2,11 +2,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.Collections;
 
-public class TTTFrame extends JFrame implements KeyListener {
+public class CC4_Frame extends JFrame implements KeyListener {
     // Display message
     private String text = "";
     // the letter you are playing as
@@ -16,7 +14,7 @@ public class TTTFrame extends JFrame implements KeyListener {
     // output stream to the server
     ObjectOutputStream os;
 
-    public TTTFrame(GameData gameData, ObjectOutputStream os, char player)
+    public CC4_Frame(GameData gameData, ObjectOutputStream os, char player)
     {
         super("Connect Four Game");
         // sets the attributes
