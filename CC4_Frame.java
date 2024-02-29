@@ -32,7 +32,7 @@ public class CC4_Frame extends JFrame implements KeyListener {
         if(player == 'X')
             text = "Waiting for O to Connect";
 
-        setSize(400,460);
+        setSize(600,600);
         setResizable(false);
         setAlwaysOnTop(true);
         setVisible(true);
@@ -41,7 +41,7 @@ public class CC4_Frame extends JFrame implements KeyListener {
     public void paint(Graphics g)
     {
         // draws the background
-        g.setColor(Color.BLACK);
+        g.setColor(Color.YELLOW);
         g.fillRect(0,0,getWidth(),getHeight());
 
         // draws the display text to the screen
@@ -50,11 +50,53 @@ public class CC4_Frame extends JFrame implements KeyListener {
         g.drawString(text,20,55);
 
         // draws the tic-tac-toe grid lines to the screen
-        g.setColor(Color.RED);
+        int inc = 0;
+        for(int i = 1; i <= 7; i++){
+            inc += 70;
+            g.setColor(Color.WHITE);
+            g.fillOval(inc, 60 , 60,60);
+        }
+        inc = 0;
+        for(int i = 1; i <= 7; i++){
+            inc += 70;
+            g.setColor(Color.WHITE);
+            g.fillOval(inc, 130 , 60,60);
+        }
+        inc = 0;
+        for(int i = 1; i <= 7; i++){
+            inc += 70;
+            g.setColor(Color.WHITE);
+            g.fillOval(inc, 200 , 60,60);
+        }
+        inc = 0;
+        for(int i = 1; i <= 7; i++){
+            inc += 70;
+            g.setColor(Color.WHITE);
+            g.fillOval(inc, 270 , 60,60);
+        }
+        inc = 0;
+        for(int i = 1; i <= 7; i++){
+            inc += 70;
+            g.setColor(Color.WHITE);
+            g.fillOval(inc, 340 , 60,60);
+        }
+        inc = 0;
+        for(int i = 1; i <= 7; i++){
+            inc += 70;
+            g.setColor(Color.WHITE);
+            g.fillOval(inc, 410 , 60,60);
+        }
+        inc = 0;
+        for(int i = 1; i <= 7; i++){
+            inc += 70;
+            g.setColor(Color.WHITE);
+            g.fillOval(inc, 480 , 60,60);
+        }
+        /*g.setColor(Color.RED);
         for(int y =0;y<=1; y++)
             g.drawLine(0,(y+1)*133+60,getWidth(),(y+1)*133+60);
         for(int x =0;x<=1; x++)
-            g.drawLine((x+1)*133,60,(x+1)*133,getHeight());
+            g.drawLine((x+1)*133,60,(x+1)*133,getHeight());*/
 
         // draws the player moves to the screen
         g.setFont(new Font("Times New Roman",Font.BOLD,70));
