@@ -2,9 +2,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.ObjectOutputStream;
 
-public class CC4_Frame extends JFrame implements KeyListener {
+public class CC4_Frame extends JFrame implements MouseListener {
     // Display message
     private String text = "";
     // the letter you are playing as
@@ -23,7 +25,7 @@ public class CC4_Frame extends JFrame implements KeyListener {
         this.player = player;
 
         // adds a KeyListener to the Frame
-        addKeyListener(this);
+        addMouseListener(this);
 
         // makes closing the frame close the program
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -127,7 +129,7 @@ public class CC4_Frame extends JFrame implements KeyListener {
         repaint();
     }
 
-    @Override
+  /*  @Override
     public void keyTyped(KeyEvent event) {
         char key = event.getKeyChar();
         int r;
@@ -186,13 +188,56 @@ public class CC4_Frame extends JFrame implements KeyListener {
 
     }
 
+
+   */
+
+
     @Override
-    public void keyPressed(KeyEvent e) {
+    public void mouseClicked(MouseEvent e) {
 
     }
 
     @Override
-    public void keyReleased(KeyEvent e) {
+    public void mousePressed(MouseEvent e) {
+        int r = 0;
+        if(getMousePosition().getX() >=140 && getMousePosition().getY() <=200)
+        {
+            r = 1;
+        }
+        if(getMousePosition().getX() >=210 && getMousePosition().getY() <=270)
+        {
+            r = 2;
+        }
+        if(getMousePosition().getX() >=280 && getMousePosition().getY() <=340)
+        {
+            r = 3;
+        }
+        if(getMousePosition().getX() >=350 && getMousePosition().getY() <=410)
+        {
+            r = 4;
+        }
+        if(getMousePosition().getX() >=420 && getMousePosition().getY() <=480)
+        {
+            r = 5;
+        }
+        if(getMousePosition().getX() >=490 && getMousePosition().getY() <=540)
+        {
+            r = 6;
+        }
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
 
     }
 }
