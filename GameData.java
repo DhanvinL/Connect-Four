@@ -1,5 +1,7 @@
+import java.util.ArrayList;
+
 public class GameData
-{
+{/*
     private char[][] grid = {{' ',' ', ' '},{' ',' ', ' '},{' ',' ', ' '}};
 
     public char[][] getGrid()
@@ -45,4 +47,14 @@ public class GameData
             return false;
     }
 
+   */
+    private char[][] grid = {{' ',' ', ' '},{' ',' ', ' '},{' ',' ', ' '}};
+    private ArrayList<Object> col1 = new ArrayList<>();
+    private ArrayList<Object> col2 = new ArrayList<>();
+    private ArrayList<Object> col3 = new ArrayList<>();
+    private ArrayList<Object> col4 = new ArrayList<>();
+
+    public ArrayList<Object> getCol1() {
+        return col1;
+    }
 }

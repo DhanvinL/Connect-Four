@@ -32,7 +32,7 @@ public class CC4_Frame extends JFrame implements MouseListener {
 
         // Set initial frame message
         if(player == 'X')
-            text = "Waiting for O to Connect";
+            text = "Waiting for Black to Connect";
 
         setSize(600,600);
         setResizable(false);
