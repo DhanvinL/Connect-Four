@@ -1,6 +1,8 @@
+import javax.print.DocFlavor;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.Scanner;
 
 public class ClientMain
 {
@@ -10,8 +12,11 @@ public class ClientMain
             // create an object for the TTT game
             GameData gameData = new GameData();
 
+            Scanner sc = new Scanner(System.in);
+            System.out.println("Enter the IP: ");
+            String ip = sc.next();
             // create a connection to server
-            Socket socket = new Socket("127.0.0.1",8001);
+            Socket socket = new Socket(ip,8001);
             ObjectInputStream is = new ObjectInputStream(socket.getInputStream());
             ObjectOutputStream os = new ObjectOutputStream(socket.getOutputStream());
 

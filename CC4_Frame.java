@@ -42,6 +42,13 @@ public class CC4_Frame extends JFrame implements MouseListener {
 
     public void paint(Graphics g)
     {
+        for (int row = 0; row < gameData.getGrid().length; row++) {
+            System.out.print("Row " + (row + 1) + ": ");
+            for (int col = 0; col < gameData.getGrid()[0].length; col++) {
+                System.out.print(gameData.getGrid()[row][col] + " ");
+            }
+            System.out.println();
+        }
         // draws the background
         g.setColor(Color.YELLOW);
         g.fillRect(0,0,getWidth(),getHeight());
@@ -49,9 +56,9 @@ public class CC4_Frame extends JFrame implements MouseListener {
         // draws the display text to the screen
         g.setColor(Color.RED);
         g.setFont(new Font("Times New Roman",Font.BOLD,30));
-        g.drawString(text,20,55);
+        g.drawString(text,20    ,55);
 
-        // draws the tic-tac-toe grid lines to the screen
+        // draws the c4 grid lines to the screen
         int inc = 0;
         for(int i = 1; i <= 7; i++){
             inc += 70;
@@ -88,11 +95,26 @@ public class CC4_Frame extends JFrame implements MouseListener {
             g.setColor(Color.WHITE);
             g.fillOval(inc, 410 , 60,60);
         }
-        inc = 0;
-        for(int i = 1; i <= 7; i++){
-            inc += 70;
-            g.setColor(Color.WHITE);
-            g.fillOval(inc, 480 , 60,60);
+
+        for(int u = 0;u<gameData.getGrid().length;u++)
+        {
+            for(int v = 0;v<gameData.getGrid()[0].length;v++)
+            {
+                if(gameData.getGrid()[u][v]!= ' ')
+                {
+
+                    if(gameData.getGrid()[u][v] == 'X')
+                    {
+                            g.setColor(Color.RED);
+                            g.fillOval((v*70) + 70, (u*70) + 60,60,60 );
+                    }
+                    if(gameData.getGrid()[u][v] == 'O')
+                    {
+                        g.setColor(Color.BLACK);
+                        g.fillOval((v*70) + 70, (u*70) + 60,60,60 );
+                    }
+                }
+            }
         }
         /*g.setColor(Color.RED);
         for(int y =0;y<=1; y++)
@@ -101,14 +123,24 @@ public class CC4_Frame extends JFrame implements MouseListener {
             g.drawLine((x+1)*133,60,(x+1)*133,getHeight());*/
 
         // draws the player moves to the screen
-        g.setFont(new Font("Times New Roman",Font.BOLD,70));
+        /*g.setFont(new Font("Times New Roman",Font.BOLD,70));
         for(int r=0; r<gameData.getGrid().length; r++)
             for(int c=0; c<gameData.getGrid().length; c++)
                 g.drawString(""+gameData.getGrid()[r][c],c*133+42,r*133+150);
+
+         */
     }
 
     public void setText(String text) {
         this.text = text;
+        if(text.contains("X"))
+        {
+            this.text = "Red's Turn";
+        }
+        else{
+            this.text = "Black's Turn";
+        }
+
         repaint();
     }
 
@@ -123,7 +155,7 @@ public class CC4_Frame extends JFrame implements MouseListener {
         repaint();
     }
 
-    public void makeMove(int c, int r, char letter)
+    public void makeMove(int r, int c, char letter)
     {
         gameData.getGrid()[r][c] = letter;
         repaint();
@@ -199,30 +231,37 @@ public class CC4_Frame extends JFrame implements MouseListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
+        int c = 0;
+        System.out.println(getMousePosition().getX());
+        if (getMousePosition().getX() >= 140 && getMousePosition().getX() <= 200) {
+            c = 1;
+        }
+        if (getMousePosition().getX() >= 210 && getMousePosition().getX() <= 270) {
+            c = 2;
+        }
+        if (getMousePosition().getX() >= 280 && getMousePosition().getX() <= 340) {
+            c = 3;
+        }
+        if (getMousePosition().getX() >= 350 && getMousePosition().getX() <= 410) {
+            c = 4;
+        }
+        if (getMousePosition().getX() >= 420 && getMousePosition().getX() <= 480) {
+            c = 5;
+        }
+        if (getMousePosition().getX() >= 490 && getMousePosition().getX() <= 550) {
+            c = 6;
+        }
         int r = 0;
-        if(getMousePosition().getX() >=140 && getMousePosition().getY() <=200)
-        {
-            r = 1;
-        }
-        if(getMousePosition().getX() >=210 && getMousePosition().getY() <=270)
-        {
-            r = 2;
-        }
-        if(getMousePosition().getX() >=280 && getMousePosition().getY() <=340)
-        {
-            r = 3;
-        }
-        if(getMousePosition().getX() >=350 && getMousePosition().getY() <=410)
-        {
-            r = 4;
-        }
-        if(getMousePosition().getX() >=420 && getMousePosition().getY() <=480)
-        {
-            r = 5;
-        }
-        if(getMousePosition().getX() >=490 && getMousePosition().getY() <=540)
-        {
-            r = 6;
+        System.out.println(c);
+
+        // if a valid enter was entered, send the move to the server
+        if (c != -11) {
+            try {
+                os.writeObject(new CommandFromClient(CommandFromClient.MOVE, "" +r + c + player));
+            } catch (Exception f) {
+                f.printStackTrace();
+            }
+
         }
     }
 

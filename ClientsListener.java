@@ -33,11 +33,10 @@ public class ClientsListener implements Runnable
                 {
                     String data = cfs.getData();
                     // pulls data for the move from the data field
-                    int c = data.charAt(0) - '0';
-                    int r = data.charAt(1) - '0';
-
+                    int c = data.charAt(1) - '0';
+                    int r = data.charAt(0) - '0';
                     // changes the board and redraw the screen
-                    frame.makeMove(c,r,data.charAt(2));
+                    frame.makeMove(r,c,data.charAt(2));
                 }
                 // handles the various end game states
                 else if(cfs.getCommand() == CommandFromServer.TIE)
@@ -46,11 +45,11 @@ public class ClientsListener implements Runnable
                 }
                 else if(cfs.getCommand() == CommandFromServer.X_WINS)
                 {
-                    frame.setText("X wins!");
+                    frame.setText("Red wins!");
                 }
                 else if(cfs.getCommand() == CommandFromServer.O_WINS)
                 {
-                    frame.setText("O wins!");
+                    frame.setText("Black wins!");
                 }
             }
         }

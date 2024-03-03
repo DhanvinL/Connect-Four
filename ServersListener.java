@@ -39,12 +39,28 @@ public class  ServersListener implements Runnable
                 {
                     // pulls data for the move from the data field
                     String data=cfc.getData();
-                    int c = data.charAt(0) - '0';
-                    int r = data.charAt(1) - '0';
+                    int c = data.charAt(1) - '0';
+                    int r =data.charAt(0) - '0';
+                    System.out.println(r + " " + c + "r and c");
+                    for(int x =gameData.getGrid().length-1;x>=0;x--)
+                    {
+                        System.out.println("The x is:" + x);
+                        if(gameData.getGrid()[x][c] == ' ')
+                        {
+                            r = x;
+                            break;
+                        }
+                    }
+                    //System.out.println(r);
+                    data = Integer.toString(r) + c + player;
+                    System.out.println(data);
 
                     // if the move is invalid it, do not process it
-                    if(gameData.getGrid()[r][c]!=' ')
-                        continue;
+                    //if(r!=-11)
+                     //   continue;
+
+
+
 
                     // changes the server side game board
                     gameData.getGrid()[r][c] = player;
