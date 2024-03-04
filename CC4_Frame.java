@@ -133,24 +133,27 @@ public class CC4_Frame extends JFrame implements MouseListener {
 
     public void setText(String text) {
         this.text = text;
-        if(text.contains("X"))
-        {
-            this.text = "Red's Turn";
-        }
-        else{
-            this.text = "Black's Turn";
-        }
+        this.text = text;
+        repaint();
 
         repaint();
     }
 
 
     public void setTurn(char turn) {
+        String s = "";
         if(turn==player)
             text = "Your turn";
         else
         {
-            text = turn+"'s turn.";
+            if(turn == 'X')
+            {
+                s = "Red";
+            }
+            else{
+                s = "Black";
+            }
+            text = s+"'s turn.";
         }
         repaint();
     }

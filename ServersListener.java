@@ -37,6 +37,7 @@ public class  ServersListener implements Runnable
                         && !gameData.isWinner('O')
                         && !gameData.isCat())
                 {
+                    boolean go = false;
                     // pulls data for the move from the data field
                     String data=cfc.getData();
                     int c = data.charAt(1) - '0';
@@ -48,29 +49,34 @@ public class  ServersListener implements Runnable
                         if(gameData.getGrid()[x][c] == ' ')
                         {
                             r = x;
+                            go = true;
                             break;
                         }
                     }
-                    //System.out.println(r);
-                    data = Integer.toString(r) + c + player;
-                    System.out.println(data);
+                    if(go)
+                    {
+                        //System.out.println(r);
+                        data = Integer.toString(r) + c + player;
+                        System.out.println(data);
 
-                    // if the move is invalid it, do not process it
-                    //if(r!=-11)
-                     //   continue;
+                        // if the move is invalid it, do not process it
+                        //if(r!=-11)
+                        //   continue;
 
 
 
 
-                    // changes the server side game board
-                    gameData.getGrid()[r][c] = player;
+                        // changes the server side game board
+                        gameData.getGrid()[r][c] = player;
 
-                    // sends the move out to both players
-                    sendCommand(new CommandFromServer(CommandFromServer.MOVE,data));
+                        // sends the move out to both players
+                        sendCommand(new CommandFromServer(CommandFromServer.MOVE,data));
 
-                    // changes the turn and checks to see if the game is over
-                    changeTurn();
-                    checkGameOver();
+                        // changes the turn and checks to see if the game is over
+                        changeTurn();
+                        checkGameOver();
+                    }
+
                 }
             }
         }
