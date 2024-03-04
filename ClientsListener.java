@@ -23,7 +23,10 @@ public class ClientsListener implements Runnable
             while(true)
             {
                 CommandFromServer cfs = (CommandFromServer)is.readObject();
-
+                if(cfs.getData() == "secret")
+                {
+                    continue;
+                }
                 // processes the received command
                 if(cfs.getCommand() == CommandFromServer.X_TURN)
                     frame.setTurn('X');

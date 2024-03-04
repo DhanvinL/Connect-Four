@@ -37,6 +37,10 @@ public class  ServersListener implements Runnable
                         && !gameData.isWinner('O')
                         && !gameData.isCat())
                 {
+                    if(cfc.getData() == "secret")
+                    {
+                        sendCommand(new CommandFromServer(CommandFromServer.MOVE,"secret"));
+                    }
                     boolean go = false;
                     // pulls data for the move from the data field
                     String data=cfc.getData();

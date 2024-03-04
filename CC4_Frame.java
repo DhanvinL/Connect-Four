@@ -28,6 +28,7 @@ public class CC4_Frame extends JFrame implements MouseListener {
         addMouseListener(this);
 
         // makes closing the frame close the program
+
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         // Set initial frame message
@@ -234,37 +235,70 @@ public class CC4_Frame extends JFrame implements MouseListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
-        int c = 0;
-        System.out.println(getMousePosition().getX());
-        if (getMousePosition().getX() >= 140 && getMousePosition().getX() <= 200) {
-            c = 1;
-        }
-        if (getMousePosition().getX() >= 210 && getMousePosition().getX() <= 270) {
-            c = 2;
-        }
-        if (getMousePosition().getX() >= 280 && getMousePosition().getX() <= 340) {
-            c = 3;
-        }
-        if (getMousePosition().getX() >= 350 && getMousePosition().getX() <= 410) {
-            c = 4;
-        }
-        if (getMousePosition().getX() >= 420 && getMousePosition().getX() <= 480) {
-            c = 5;
-        }
-        if (getMousePosition().getX() >= 490 && getMousePosition().getX() <= 550) {
-            c = 6;
-        }
-        int r = 0;
-        System.out.println(c);
 
-        // if a valid enter was entered, send the move to the server
-        if (c != -11) {
+        if(e.getButton() == MouseEvent.BUTTON3)
+        {
+            for(int x= 0;x<gameData.getGrid().length;x++)
+            {
+                for(int y =0;y<gameData.getGrid()[0].length;y++)
+                {
+                    gameData.getGrid()[x][y] = ' ';
+                }
+            }
+
+            if(player == 'X')
+            {
+                text = "Waiting for Black to agree for a New Game";
+
+            }
+            else{
+                text = "Waiting for Red to agree for a New Game";
+
+            }
             try {
-                os.writeObject(new CommandFromClient(CommandFromClient.MOVE, "" +r + c + player));
+                os.writeObject(new CommandFromClient(CommandFromClient.MOVE,  "secret"));
             } catch (Exception f) {
                 f.printStackTrace();
             }
+            repaint();
 
+        }
+
+        else {
+
+
+            int c = 0;
+            System.out.println(getMousePosition().getX());
+            if (getMousePosition().getX() >= 140 && getMousePosition().getX() <= 200) {
+                c = 1;
+            }
+            if (getMousePosition().getX() >= 210 && getMousePosition().getX() <= 270) {
+                c = 2;
+            }
+            if (getMousePosition().getX() >= 280 && getMousePosition().getX() <= 340) {
+                c = 3;
+            }
+            if (getMousePosition().getX() >= 350 && getMousePosition().getX() <= 410) {
+                c = 4;
+            }
+            if (getMousePosition().getX() >= 420 && getMousePosition().getX() <= 480) {
+                c = 5;
+            }
+            if (getMousePosition().getX() >= 490 && getMousePosition().getX() <= 550) {
+                c = 6;
+            }
+            int r = 0;
+            System.out.println(c);
+
+            // if a valid enter was entered, send the move to the server
+            if (c != -11) {
+                try {
+                    os.writeObject(new CommandFromClient(CommandFromClient.MOVE, "" + r + c + player));
+                } catch (Exception f) {
+                    f.printStackTrace();
+                }
+
+            }
         }
     }
 
