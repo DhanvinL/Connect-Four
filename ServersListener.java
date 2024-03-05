@@ -1,6 +1,7 @@
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class  ServersListener implements Runnable
 {
@@ -32,55 +33,56 @@ public class  ServersListener implements Runnable
                 CommandFromClient cfc = (CommandFromClient) is.readObject();
 
                 // handle the received command
+                if(cfc.getCommand() == CommandFromClient.RESTART)
+                {
+                    gameData.reset();
+                    sendCommand(new CommandFromServer(CommandFromServer.X_TURN, "secret"));
+                }
                 if(cfc.getCommand()==CommandFromClient.MOVE &&
                     turn==player && !gameData.isWinner('X')
                         && !gameData.isWinner('O')
-                        && !gameData.isCat())
-                {
-                    if(cfc.getData() == "secret")
-                    {
-                        sendCommand(new CommandFromServer(CommandFromServer.MOVE,"secret"));
-                    }
-                    boolean go = false;
-                    // pulls data for the move from the data field
-                    String data=cfc.getData();
-                    int c = data.charAt(1) - '0';
-                    int r =data.charAt(0) - '0';
-                    System.out.println(r + " " + c + "r and c");
-                    for(int x =gameData.getGrid().length-1;x>=0;x--)
-                    {
-                        System.out.println("The x is:" + x);
-                        if(gameData.getGrid()[x][c] == ' ')
-                        {
-                            r = x;
-                            go = true;
-                            break;
+                        && !gameData.isCat()) {
+
+
+
+
+                        boolean go = false;
+                        // pulls data for the move from the data field
+                        String data = cfc.getData();
+                        int c = data.charAt(1) - '0';
+                        int r = data.charAt(0) - '0';
+                        System.out.println(r + " " + c + "r and c");
+                        for (int x = gameData.getGrid().length - 1; x >= 0; x--) {
+                            System.out.println("The x is:" + x);
+                            if (gameData.getGrid()[x][c] == ' ') {
+                                r = x;
+                                go = true;
+                                break;
+                            }
                         }
-                    }
-                    if(go)
-                    {
-                        //System.out.println(r);
-                        data = Integer.toString(r) + c + player;
-                        System.out.println(data);
+                        if (go) {
+                            //System.out.println(r);
+                            data = Integer.toString(r) + c + player;
+                            System.out.println(data);
 
-                        // if the move is invalid it, do not process it
-                        //if(r!=-11)
-                        //   continue;
+                            // if the move is invalid it, do not process it
+                            //if(r!=-11)
+                            //   continue;
 
 
+                            // changes the server side game board
+                            gameData.getGrid()[r][c] = player;
+
+                            // sends the move out to both players
+                            sendCommand(new CommandFromServer(CommandFromServer.MOVE, data));
+
+                            // changes the turn and checks to see if the game is over
+                            changeTurn();
+                            checkGameOver();
+                        }
 
 
-                        // changes the server side game board
-                        gameData.getGrid()[r][c] = player;
-
-                        // sends the move out to both players
-                        sendCommand(new CommandFromServer(CommandFromServer.MOVE,data));
-
-                        // changes the turn and checks to see if the game is over
-                        changeTurn();
-                        checkGameOver();
-                    }
-
+                    //emd
                 }
             }
         }

@@ -3,16 +3,41 @@ import java.util.ArrayList;
 public class GameData
 {
     private char[][] grid = {{' ',' ', ' ', ' ', ' ', ' ', ' '}, {' ',' ', ' ', ' ', ' ', ' ', ' '}, {' ',' ', ' ', ' ', ' ', ' ', ' '}, {' ',' ', ' ', ' ', ' ', ' ', ' '}, {' ',' ', ' ', ' ', ' ', ' ', ' '}, {' ',' ', ' ', ' ', ' ', ' ', ' '}};
-
+    private  int counter = 0;
+    private boolean justOne = false;
     public char[][] getGrid()
     {
         return grid;
     }
+    public int getCounter(){
+        return counter;
+    }
+    public boolean getjustOne()
+    {
+        return justOne;
+    }
+    public void setjustOne()
+    {
+        if(!justOne)
+        {
+            this.justOne = true;
+        }
+        else{
+            this.justOne = false;
+        }
+    }
+
+    public void setCounter()
+    {
+        this.counter = counter + 1;
+    }
+    public void resetCounter()
+    {
+        this.counter =0;
+    }
 
     public void reset()
     {
-
-        grid = new char[6][7];
         for(int r=0;r<grid.length; r++)
             for(int c=0; c<grid[0].length; c++)
                 grid[r][c]=' ';
