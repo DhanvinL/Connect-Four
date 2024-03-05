@@ -1,4 +1,5 @@
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
@@ -6,8 +7,8 @@ import java.net.Socket;
 
 public class ServerMain
 {
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) throws IOException {
+        boolean go = false;
         try
         {
             // creates a socket that allows connections on port 8001
@@ -43,16 +44,19 @@ public class ServerMain
             xos.writeObject(new CommandFromServer(CommandFromServer.X_TURN,null));
             oos.writeObject(new CommandFromServer(CommandFromServer.X_TURN,null));
             while(!serverSocket.isClosed()) {
-                if (xCon.isClosed()) {
-                    System.out.println("X is closed");
-                }
-                if (oCon.isClosed()) {
-                    System.out.println("O is closed");
-                }
+            if (xCon.isClosed()) {
+                System.out.println("X is closed");
+                go = true;
             }
+            if (oCon.isClosed()) {
+                System.out.println("O is closed");
+                go = true;
+            }
+        }
         }
         catch (Exception e)
         {
+            new CommandFromServer(CommandFromServer.DISCONNECTED,null);
             e.printStackTrace();
         }
     }

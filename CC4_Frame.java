@@ -1,7 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.ObjectOutputStream;
@@ -40,6 +38,25 @@ public class CC4_Frame extends JFrame implements MouseListener {
         setAlwaysOnTop(true);
         setVisible(true);
     }
+    /*public int countDown()
+    {
+        boolean go = false;
+        int x =5;
+        while (x > 0 ) {
+            System.out.println("x = " + x);
+            try {
+                Thread.sleep(1000);
+            } catch (Exception e) {}
+            x--;
+        }
+        if(x == 0)
+        {
+            return WindowConstants.EXIT_ON_CLOSE;
+        }
+
+    }
+
+     */
 
     public void paint(Graphics g)
     {
