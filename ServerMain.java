@@ -42,14 +42,6 @@ public class ServerMain
             t.start();
             xos.writeObject(new CommandFromServer(CommandFromServer.X_TURN,null));
             oos.writeObject(new CommandFromServer(CommandFromServer.X_TURN,null));
-            while(!serverSocket.isClosed()) {
-                if (xCon.isClosed()) {
-                    System.out.println("X is closed");
-                }
-                if (oCon.isClosed()) {
-                    System.out.println("O is closed");
-                }
-            }
         }
         catch (Exception e)
         {
