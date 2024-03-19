@@ -6,11 +6,11 @@ public class ClientsListener implements Runnable
 {
     private ObjectInputStream is = null;
     private ObjectOutputStream os = null;
-    private CC4_Frame frame = null;
+    private ChatRoom_Frame frame = null;
 
     public ClientsListener(ObjectInputStream is,
                            ObjectOutputStream os,
-                           CC4_Frame frame) {
+                           ChatRoom_Frame frame) {
         this.is = is;
         this.os = os;
         this.frame = frame;
